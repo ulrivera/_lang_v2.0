@@ -1,0 +1,65 @@
+language_code: "pl"
+language_name: "Polish"
+
+recast_rules:
+
+  A0:
+    red:
+      - "Pronunciación que vuelve la palabra irreconocible (był → [bil], męż → [mąʂ])"
+      - "Confusión szukać con [ɕ] en lugar de [ʂ] — riesgo de vulgaridad"
+      - "Omisión de nie en nie mam vs mam — el significado se invierte (binario)"
+    amber:
+      - "ta dom en lugar de ten dom — inteligible por contexto, suena roto"
+      - "mówi en lugar de mówię — inteligible si el sujeto ja es explícito o contextual"
+    green:
+      - "Nominativo czas en lugar de Genitivo czasu tras nie mam — pertenece a A2"
+      - "Conjugación en pretérito o futuro — A0 opera solo en presente"
+
+  A2:
+    red:
+      - "Aspecto en 15 verbos top (robić/zrobić)"
+      - "Casos Nom/Acc/Gen tras nie ma, nie mam, brak, nie lubię"
+      - "Instrumental con być (jestem lekarzem)"
+      - "Dativo con dziękuję (dziękuję ci/Panu)"
+      - "Negación sistemática con Genitivo (nie mam czasu, nie znam tej osoby)"
+    amber:
+      - "Género en verbo pasado (zrobiłem vs zrobiłam)"
+      - "Pronunciación de clusters consonánticos si es inteligible"
+      - "Locativo con w/o en frases fijas (mieszkam w Polsce, myślę o tobie)"
+      - "Dativo con verbos frecuentes (pomagać, odpowiadać, wierzyć)"
+    green:
+      - "Vocativo"
+      - "Plural complejo de casos (reservado para B2)"
+      - "Participios y gerundio"
+
+  B2:
+    red:
+      - "Colocaciones de alta frecuencia (podjąć decyzję)"
+      - "Preposiciones que cambian de caso (na+Acc vs na+Loc, o+Loc, z+Ins)"
+      - "Doble negación obligatoria (nikt nic nie wie, nigdy nie)"
+      - "Casos en plural (todos)"
+      - "Voz pasiva con zostać (zostało zrobione)"
+    amber:
+      - "Formación del condicional (-bym enclítico)"
+      - "Verbos de movimiento prefixados (wejść, wyjść)"
+      - "Orden de palabras con énfasis pragmático (desplazamiento del foco)"
+      - "Aspecto en verbos de percepción/mente (widzieć/dostrzec, słyszeć/usłyszeć)"
+    green:
+      - "Matices aspectuales iterativos (chadzać)"
+      - "Participios activos como adjetivos (idący, śpiący)"
+      - "Gerundio sustituido por infinitivo o to + oración"
+
+  C2:
+    red:
+      - "Fallos de registro (Pan/Pani vs Ty en contexto formal)"
+      - "Falta de hedging (chyba, moim zdaniem, chyba że) en críticas"
+      - "Alternancia consonántica en declinación (ręka/ręki, krew/krwi, brzeg/brzegu)"
+      - "Partículas modales de actitud (przecież, no, żeby en función pragmática)"
+    amber:
+      - "Uso subóptimo de diminutivos pragmáticos (chwileczka)"
+      - "Gerundio y participios en registro elevado (pisanie, czytany)"
+      - "Estilo indirecto libre en narración"
+    green:
+      - "Variaciones dialectales o gwara con propósito estilístico intencional"
+      - "Arcaísmos en uso no intencional (error, no elección estilística)"
+      - "Etimología/falsos amigos históricos en producción activa"

@@ -1,0 +1,26 @@
+# Motor de Recast Transversal — Lógica Universal
+# Basado en Teoría de Complejidad Dinámica y Carga Cognitiva en SLA
+# Este archivo NO se indexa en el RAG — es comportamiento del motor, no contenido recuperable
+
+red:
+  label: "ROJO — Interrupción del Núcleo / Fallo de Inteligibilidad"
+  definition: >
+    El error impide la comprensión, cambia radicalmente el significado,
+    o afecta una estructura marcada como Pareto Activo para el nivel actual.
+  action: "Recast inmediato y contrastivo en el siguiente turno."
+
+amber:
+  label: "ÁMBAR — Fricción Emergente / Patrón Repetitivo"
+  definition: >
+    El error no rompe la comunicación, pero suena extranjero (falta de
+    colocación nativa) o se ha repetido 2+ veces en la misma sesión.
+  action: >
+    Modelado implícito (el interlocutor usa la forma correcta en su respuesta)
+    sin detener el flujo. Si se repite, pregunta de clarificación metalingüística suave.
+
+green:
+  label: "VERDE — Ruido Permisible / Zona de Desarrollo Próximo"
+  definition: >
+    El error pertenece a una estructura morfológica o pragmática por encima
+    del nivel actual, o es variación de acento/dialecto sin afectar inteligibilidad.
+  action: "Ignorar activamente. Validar el mensaje y continuar."

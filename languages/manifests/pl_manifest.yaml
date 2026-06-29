@@ -1,0 +1,53 @@
+language_code: "pl"
+language_name: "Polish"
+family: "slavic_inflectional"
+tonal: false
+
+tts:
+  engine: "edge-tts"
+  voices:
+    primary: "pl-PL-MarekNeural"
+    secondary: "pl-PL-ZofiaNeural"
+
+morphology:
+  bottleneck: "verbal aspect and case declension system (7 cases)"
+  red_zone_structures:
+    - "iść vs chodzić (directional vs habitual motion verbs)"
+    - "nominative vs accusative case"
+    - "perfective vs imperfective aspect in past tense"
+  drill_patterns:
+    - type: "aspect_pair_substitution"
+      template: "Wczoraj {verb_imperfective}, ale jutro {verb_perfective}"
+    - type: "case_substitution"
+      template: "Widzę {accusative} — To jest {nominative}"
+
+pareto:
+  A0:
+    word_families: 150
+    source_corpus: "chunks de supervivencia — sin gramática explícita"
+  A2:
+    word_families: 1000
+    source_corpus: "NKJP (Narodowy Korpus Języka Polskiego)"
+  B2:
+    word_families: 3500
+    collocations_priority: "high"
+    source_corpus: "NKJP + Polish subtitles corpus"
+  C2:
+    word_families: 8000
+    focus: "pragmatic_competence and register"
+    source_corpus: "NKJP full"
+
+resources:
+  has_frequency_dictionary: true
+  has_collocation_dictionary: false
+  has_native_corpus: true
+  alternative_data_source: "N-gram extraction from Polish subtitles corpus (OpenSubtitles)"
+
+pragmatics:
+  honorifics_system: "formal_pan_pani"
+  register_distinction:
+    - "formal"
+    - "informal"
+    - "written_academic"
+
+romanization_system: null
