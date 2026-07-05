@@ -1,0 +1,23 @@
+structure: "verb_byc"
+language: "pl"
+niveles: ["A0", "A2"]
+template: "{sujeto} {verbo} {complemento}."
+sujetos:
+  - [ja, jestem]
+  - [ty, jesteś]
+  - [on, jest]
+  - [ona, jest]
+  - [my, jesteśmy]
+complementos:
+  A0:
+    - "z Polski"
+    - "z Meksyku"
+    - "studentem"
+    - "nauczycielem"
+    - "w domu"
+  A2:
+    - "lekarzem"
+    - "inżynierem"
+    - "zmęczony"
+    - "gotowy"
+    - "w pracy"

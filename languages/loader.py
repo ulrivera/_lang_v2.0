@@ -10,6 +10,8 @@ from config.settings import MANIFESTS_DIR, BASE_DIR
 
 logger = logging.getLogger(__name__)
 
+        
+
 REQUIRED_MANIFEST_FIELDS = [
     "language_code", "language_name", "family", "tonal"
 ]
@@ -65,6 +67,7 @@ class ManifestLoader:
     def _parse(self, manifest_data: dict, recast_data: dict) -> LanguageManifest:
         tts_data = manifest_data.get("tts", {})
         voices = tts_data.get("voices", {})
+        drill_mappings=manifest_data.get("drill_mappings", {})
 
         # Pareto por nivel — dict dinámico, soporta cualquier subconjunto de A0-C2
         pareto_by_level = {}
@@ -105,3 +108,5 @@ class ManifestLoader:
             register_distinction=manifest_data.get("pragmatics", {}).get("register_distinction", []),
             romanization_system=manifest_data.get("romanization_system")
         )
+    
+        

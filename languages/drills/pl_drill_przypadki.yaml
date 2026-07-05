@@ -1,0 +1,19 @@
+structure: "locative_case"
+language: "pl"
+niveles: ["A2", "B2"]
+pares:
+  A2:
+    template_acc: "Idę na {biernik}."
+    template_loc: "Jestem na {miejscownik}."
+    pary:
+      - [pocztę, poczcie]
+      - [konferencję, konferencji]
+      - [spotkanie, spotkaniu]
+      - [imprezę, imprezie]
+  B2:
+    template_acc: "Idę do {dopelniacz}."
+    template_loc: "Jestem w {miejscownik}."
+    pary:
+      - [biura, biurze]
+      - [sklepu, sklepie]
+      - [restauracji, restauracji]

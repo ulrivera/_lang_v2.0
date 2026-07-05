@@ -1,0 +1,16 @@
+structure: "verbal_aspect"
+language: "pl"
+niveles: ["A2", "B2"]
+template: "Wczoraj {imperfective}, ale już {perfective}."
+pary:
+  A2:
+    - [czytałem, przeczytałem]
+    - [pisałem, napisałem]
+    - [jadłem, zjadłem]
+    - [robiłem, zrobiłem]
+    - [kupowałem, kupiłem]
+  B2:
+    - [mówiłem, powiedziałem]
+    - [widziałem, zobaczyłem]
+    - [słyszałem, usłyszałem]
+    - [myślałem, pomyślałem]

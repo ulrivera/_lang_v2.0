@@ -76,3 +76,5 @@ class GlobalRecastEngine:
     green_label: str
     green_definition: str
     green_action: str
+
+drill_mappings: dict = field(default_factory=dict)  # {structure: drill_yaml_path}

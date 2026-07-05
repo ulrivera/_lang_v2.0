@@ -88,14 +88,19 @@ class CLI(BaseInterface):
                 stats = sm.close()
                 self._show_stats(stats)
                 break
-
-            response, diagnosis = sm.turn(user_input)
+                
+            response, diagnosis, drill = sm.turn(user_input)
             self.display_message(f"\nTutor: {response.text}")
+
+            if drill:
+                print(f"\n  [DRILL — {drill.structure}]")
+                for i, sentence in enumerate(drill.sentences, 1):
+                    print(f"  {i}. {sentence}")
 
             if diagnosis.error_detected and diagnosis.error_type in ("red", "amber"):
                 print(f"\n  {'✗' if diagnosis.error_type == 'red' else '~'} "
-                      f"[{diagnosis.error_type.upper()}] "
-                      f"{diagnosis.error_form} → {diagnosis.correct_form}")
+                    f"[{diagnosis.error_type.upper()}] "
+                    f"{diagnosis.error_form} → {diagnosis.correct_form}")
 
     def _show_stats(self, stats: dict) -> None:
         m, s = divmod(stats["duration_seconds"], 60)

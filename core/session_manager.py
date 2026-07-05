@@ -9,6 +9,7 @@ from data.models import Session, SessionItem, FineTuningLog
 from languages.base_manifest import LanguageManifest, GlobalRecastEngine
 from languages.loader import ManifestLoader
 from config.settings import ROMANIZATION_BY_LEVEL
+from modules.drill_generator import DrillGenerator, DrillSet
 
 logger = logging.getLogger(__name__)
 
@@ -29,6 +30,8 @@ class SessionManager:
         self._history: list[dict] = []
         self._start_time: Optional[datetime] = None
         self._amber_tracker: dict[str, int] = {}
+
+        self.drill_generator = DrillGenerator(manifest)
 
     def open(self, level: str, modality: str, user_l1: str) -> str:
         last = self.db.get_last_session(self.manifest.language_code)
@@ -90,6 +93,16 @@ class SessionManager:
                 diagnosis.error_type = "red"
                 logger.debug(f"Amber escalated to red: {key}")
 
+        # Generar drill si error rojo
+        drill: DrillSet | None = None
+        if diagnosis.error_detected and diagnosis.error_type == "red" and diagnosis.structure:
+            drill = self.drill_generator.generate(
+                structure=diagnosis.structure,
+                level=level
+            )
+            if drill:
+                logger.debug(f"Drill generated: {drill.structure} — {len(drill.sentences)} sentences")
+
         # Paso 2 — Conversador
         response = self.conversador.respond(
             user_input=user_input,
@@ -111,7 +124,7 @@ class SessionManager:
             self._session.red_error_count += 1
             self._persist_error(diagnosis)
 
-        return response, diagnosis
+        return response, diagnosis, drill
 
     def close(self) -> dict:
         if not self._session_id:

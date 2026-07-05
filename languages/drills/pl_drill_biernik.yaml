@@ -1,0 +1,16 @@
+structure: "chunk_accusative"
+language: "pl"
+niveles: ["A0", "A2"]
+template: "Poproszę o {biernik}."
+nominativo_biernik:
+  A0:
+    - [kawa, kawę]
+    - [herbata, herbatę]
+    - [woda, wodę]
+    - [bilet, bilet]
+    - [menu, menu]
+  A2:
+    - [książka, książkę]
+    - [gazeta, gazetę]
+    - [rachunek, rachunek]
+    - [pomoc, pomoc]
