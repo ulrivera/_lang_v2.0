@@ -11,7 +11,7 @@ from config.settings import MANIFESTS_DIR, BASE_DIR
 logger = logging.getLogger(__name__)
 
 REQUIRED_MANIFEST_FIELDS = [
-    "language_code", "language_name", "family", "tonal", "recast_rules"
+    "language_code", "language_name", "family", "tonal"
 ]
 
 GLOBAL_RECAST_PATH = BASE_DIR / "languages" / "recast_global.yaml"

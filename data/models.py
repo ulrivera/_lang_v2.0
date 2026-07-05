@@ -3,7 +3,6 @@ from dataclasses import dataclass, field
 from typing import Optional
 from datetime import datetime
 
-
 @dataclass
 class UserProfile:
     """Perfil del usuario — PRD v2.0 sección 3, campos obligatorios L1 y nivel."""
@@ -12,23 +11,16 @@ class UserProfile:
     id: Optional[int] = None
     created_at: str = field(default_factory=lambda: datetime.now().isoformat())
 
-
 @dataclass
 class Session:
     language: str
-    level: str
-    modality: str
-    user_l1: str                  # nuevo en v2 — viene del perfil
+    level: str                    # A2, B2, C2
+    modality: str                 # chat_chat, chat_audio, audio_chat, audio_audio
     id: Optional[int] = None
     date: str = field(default_factory=lambda: datetime.now().isoformat())
     duration_seconds: int = 0
     summary: Optional[str] = None
     hook_next_session: Optional[str] = None
-    red_error_count: int = 0
-    total_items: int = 0
-    romanization_active: bool = False
-
-
 @dataclass
 class SessionItem:
     session_id: int
@@ -41,7 +33,41 @@ class SessionItem:
     error_form: Optional[str] = None
     correct_form: Optional[str] = None
     structure: Optional[str] = None
+@dataclass
+class SRSItem:
+    language: str
+    level: str
+    item: str
+    id: Optional[int] = None
+    translation: Optional[str] = None
+    item_type: Optional[str] = None
+    ease_factor: float = 2.5
+    interval_days: int = 1
+    last_quality: Optional[int] = None
+    next_review: Optional[str] = None
+    source: Optional[str] = None
+    created_at: str = field(default_factory=lambda: datetime.now().isoformat())
+@dataclass
+class FineTuningLog:
+    session_item_id: int
+    language: str
+    level: str
+    user_input: str
+    ideal_output: str
+    id: Optional[int] = None
+    error_type: Optional[str] = None
+    created_at: str = field(default_factory=lambda: datetime.now().isoformat())
 
+@dataclass
+class PassiveAudio:
+    language: str
+    level: str
+    source_module: str            # passive_studio, audio_obsidian
+    file_path: str
+    id: Optional[int] = None
+    date: str = field(default_factory=lambda: datetime.now().isoformat())
+    items_targeted: Optional[str] = None   # JSON array
+    duration_seconds: Optional[int] = None
 
 @dataclass
 class LoraTrainingCandidate:
@@ -56,7 +82,6 @@ class LoraTrainingCandidate:
     validation_source: Optional[str] = None   # "auto" o "manual"
     used_for_training: bool = False
 
-
 @dataclass
 class VaultCard:
     """Representa una tarjeta indexada del vault — metadata espejo de lo que vive en Chroma."""
@@ -68,3 +93,18 @@ class VaultCard:
     chroma_id: str
     id: Optional[int] = None
     indexed_at: str = field(default_factory=lambda: datetime.now().isoformat())
+
+@dataclass
+class Session:
+    language: str
+    level: str
+    modality: str
+    user_l1: str                  # agregar este campo
+    id: Optional[int] = None
+    date: str = field(default_factory=lambda: datetime.now().isoformat())
+    duration_seconds: int = 0
+    summary: Optional[str] = None
+    hook_next_session: Optional[str] = None
+    red_error_count: int = 0
+    total_items: int = 0
+    romanization_active: bool = False

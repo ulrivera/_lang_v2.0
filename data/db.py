@@ -4,9 +4,9 @@ import logging
 from pathlib import Path
 from typing import Optional
 from config.settings import DB_PATH
-from data.models import (
-    UserProfile, Session, SessionItem, LoraTrainingCandidate, VaultCard
+from data.models import ( Session, SessionItem, LoraTrainingCandidate, SRSItem, FineTuningLog, VaultCard
 )
+
 
 logger = logging.getLogger(__name__)
 
@@ -138,6 +138,19 @@ class Database:
             (language,)
         ).fetchone()
 
+    # --- Session Items ---
+
+    def add_session_item(self, item: SessionItem) -> int:
+        cursor = self._conn().execute(
+            """INSERT INTO session_items
+               (session_id, item_type, form, correct, error_type, recast_applied)
+               VALUES (?, ?, ?, ?, ?, ?)""",
+            (item.session_id, item.item_type, item.form,
+             int(item.correct), item.error_type, item.recast_applied)
+        )
+        self._conn().commit()
+        return cursor.lastrowid
+
     # --- LoRA training data ---
 
     def log_lora_candidate(self, candidate: LoraTrainingCandidate) -> int:
@@ -172,3 +185,49 @@ class Database:
         return self._conn().execute(
             "SELECT * FROM vault_cards WHERE language=?", (language,)
         ).fetchall()
+    
+
+   # --- SRS ---
+
+    def add_srs_item(self, item: SRSItem) -> int:
+        cursor = self._conn().execute(
+            """INSERT INTO srs_items
+               (language, level, item, translation, item_type,
+                ease_factor, interval_days, source)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+            (item.language, item.level, item.item, item.translation,
+             item.item_type, item.ease_factor, item.interval_days, item.source)
+        )
+        self._conn().commit()
+        return cursor.lastrowid
+
+    def get_due_srs_items(self, language: str, limit: int = 10) -> list:
+        return self._conn().execute(
+            """SELECT * FROM srs_items
+               WHERE language=? AND (next_review IS NULL OR next_review <= date('now'))
+               ORDER BY next_review ASC LIMIT ?""",
+            (language, limit)
+        ).fetchall()
+
+    def update_srs_item(self, item_id: int, ease_factor: float,
+                        interval_days: int, quality: int, next_review: str) -> None:
+        self._conn().execute(
+            """UPDATE srs_items
+               SET ease_factor=?, interval_days=?, last_quality=?, next_review=?
+               WHERE id=?""",
+            (ease_factor, interval_days, quality, next_review, item_id)
+        )
+        self._conn().commit()
+
+    # --- Fine-tuning log ---
+
+    def add_finetuning_log(self, log: FineTuningLog) -> int:
+        cursor = self._conn().execute(
+            """INSERT INTO finetuning_log
+               (session_item_id, language, level, user_input, ideal_output, error_type)
+               VALUES (?, ?, ?, ?, ?, ?)""",
+            (log.session_item_id, log.language, log.level,
+             log.user_input, log.ideal_output, log.error_type)
+        )
+        self._conn().commit()
+        return cursor.lastrowid
